@@ -1,4 +1,3 @@
-
 export interface User {
   username: string;
   role: 'admin';
@@ -33,6 +32,7 @@ export interface Registration {
   organization: string;
   position: string;
   address: string;
+  studentId: string;
   registrationDate: string;
   status: 'confirmed' | 'pending' | 'cancelled';
 }
@@ -60,3 +60,9 @@ export interface Announcement {
 export type Page = 'home' | 'courses' | 'faq' | 'about' | 'admin';
 
 export type AdminView = 'dashboard' | 'courses' | 'registrations' | 'cms' | 'settings_contact' | 'settings_faq';
+
+declare global {
+  interface Window {
+    html2pdf: any; // Declaration for the globally available html2pdf library
+  }
+}

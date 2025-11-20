@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/mockApi';
 import type { Course } from '../../types';
 import CourseCard from '../../contexts/components/CourseCard';
-import RegistrationModal from '../../contexts/components/RegistrationModal';
+import { RegistrationModal } from '../../contexts/components/RegistrationModal'; // Fix: Changed to named import
 import LoadingSpinner from '../../contexts/components/LoadingSpinner';
 
 const CoursesView: React.FC = () => {

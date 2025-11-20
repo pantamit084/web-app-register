@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface ConfirmationModalProps {
@@ -7,9 +6,10 @@ interface ConfirmationModalProps {
   onConfirm: () => void;
   title: string;
   message: string;
+  isConfirming?: boolean; // New prop for loading state
 }
 
-const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ isOpen, onClose, onConfirm, title, message }) => {
+const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ isOpen, onClose, onConfirm, title, message, isConfirming = false }) => {
   if (!isOpen) return null;
 
   return (
@@ -28,15 +28,17 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ isOpen, onClose, 
               onClick={onClose}
               type="button"
               className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              disabled={isConfirming} // Disable if confirming
             >
               ยกเลิก
             </button>
             <button
               onClick={onConfirm}
               type="button"
-              className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+              className="w-full sm:w-auto px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:bg-red-400 disabled:cursor-wait"
+              disabled={isConfirming} // Disable if confirming
             >
-              ยืนยันการลบ
+              {isConfirming ? 'กำลังลบ...' : 'ยืนยันการลบ'}
             </button>
           </div>
         </div>

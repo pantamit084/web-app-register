@@ -1,3 +1,4 @@
+
 import type { Course, Registration, Faq, ContactInfo, Announcement } from '../types';
 
 let mockCourses: Course[] = [
@@ -7,9 +8,9 @@ let mockCourses: Course[] = [
         courseGen: "รุ่นที่ 15",
         description: "หลักสูตรพัฒนาทักษะการบริหารจัดการโรงพยาบาลสำหรับผู้บริหารระดับกลาง",
         startDate: "2025-03-15",
-        endDate: "2025-03-20",
+        endDate: "2026-03-20",
         registrationStart: "2025-01-01",
-        registrationEnd: "2025-08-28",
+        registrationEnd: "2026-08-28",
         maxParticipants: 50,
         currentParticipants: 35,
         location: "โรงแรมสยาม บางกอก",
@@ -37,9 +38,9 @@ let mockCourses: Course[] = [
         courseGen: "รุ่นที่ 12",
         description: "พัฒนาทักษะการบริหารทรัพยากรบุคคลในองค์กรภาครัฐ",
         startDate: "2025-11-05",
-        endDate: "2025-11-10",
+        endDate: "2026-11-10",
         registrationStart: "2025-10-01",
-        registrationEnd: "2025-10-30",
+        registrationEnd: "2026-10-30",
         maxParticipants: 35,
         currentParticipants: 15,
         location: "โรงแรมเซ็นทารา แกรนด์ บางกอก",
@@ -77,6 +78,7 @@ let mockRegistrations: Registration[] = [
         organization: "โรงพยาบาลนครราชสีมา",
         position: "ผู้อำนวยการฝ่ายบริหาร",
         address: "123 ถนนสุขภาพ ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000",
+        studentId: "60123456789",
         registrationDate: "2025-01-15",
         status: "confirmed"
     },
@@ -93,9 +95,28 @@ let mockRegistrations: Registration[] = [
         organization: "โรงพยาบาลสระบุรี",
         position: "หัวหน้าแผนกพยาบาล",
         address: "456 หมู่ 7 ตำบลบ้านใหม่ อำเภอเมือง จังหวัดสระบุรี 18000",
+        studentId: "61987654321",
+        registrationDate: "2025-01-20",
+        status: "confirmed"
+    },
+    {
+        registrationId: "R003",
+        courseId: "C002",
+        courseName: "การบริหารจัดการโรงพยาบาล",
+        firstName: "พันธมิตร",
+        lastName: "สำเภามาตา",
+        idCard: "2-3456-78901-23-4",
+        birthDate: "1988-08-22",
+        phone: "082-345-6789",
+        email: "kanokwan@example.com",
+        organization: "โรงพยาบาลสระบุรี",
+        position: "หัวหน้าแผนกพยาบาล",
+        address: "456 หมู่ 7 ตำบลบ้านใหม่ อำเภอเมือง จังหวัดสระบุรี 18000",
+        studentId: "61987654321",
         registrationDate: "2025-01-20",
         status: "confirmed"
     }
+
 ];
 
 let mockFaqs: Faq[] = [
@@ -137,7 +158,8 @@ const api = {
             registrationId: `R${Date.now()}`,
             registrationDate: new Date().toISOString().split('T')[0],
             status: 'confirmed',
-            courseName: course?.courseName || 'Unknown Course'
+            courseName: course?.courseName || 'Unknown Course',
+            studentId: registrationData.studentId
         };
         mockRegistrations.push(newRegistration);
         setTimeout(() => resolve(newRegistration), 1000);
@@ -238,6 +260,18 @@ const api = {
           setTimeout(() => resolve({ success: true }), 500);
       });
   },
+  // New mock email function for PDF attachments
+  sendRegistrationConfirmationEmail: async (recipientEmail: string, courseName: string, registrationId: string, pdfData: Blob): Promise<boolean> => {
+    return new Promise(resolve => {
+      console.info(`--- Mock Email Sent with PDF Attachment ---`);
+      console.info(`To: ${recipientEmail}`);
+      console.info(`Subject: ยืนยันการลงทะเบียนหลักสูตร ${courseName} พร้อมเอกสาร PDF`);
+      console.info(`Body: เรียนผู้ลงทะเบียน,\n\nท่านได้ลงทะเบียนหลักสูตร "${courseName}" (รหัสลงทะเบียน: ${registrationId}) เรียบร้อยแล้ว. กรุณาดาวน์โหลดเอกสารยืนยันการลงทะเบียนที่แนบมาพร้อมกับอีเมลนี้.\n\nขอแสดงความนับถือ\nวิทยาลัยนักบริหารสาธารณสุข`);
+      console.info(`Attachment: registration_${registrationId}.pdf (Type: ${pdfData.type}, Size: ${pdfData.size} bytes)`);
+      console.info(`------------------------------------------\n`);
+      setTimeout(() => resolve(true), 500); // Simulate network delay
+    });
+  }
 };
 
 export default api;

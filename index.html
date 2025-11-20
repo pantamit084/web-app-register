@@ -11,6 +11,50 @@
     <style>
       body {
         font-family: 'Kanit', sans-serif;
+        background-color: #f3f4f6; /* Equivalent to Tailwind's bg-gray-100 */
+      }
+      html.dark body {
+        background-color: #111827; /* Equivalent to Tailwind's bg-gray-900 */
+      }
+      /* Styles for PDF generation (can be inline in the generated HTML or here) */
+      .pdf-container {
+          padding: 20px;
+          font-family: 'Kanit', sans-serif; /* Ensure Kanit is available for PDF */
+          color: #333;
+      }
+      .pdf-header {
+          text-align: center;
+          margin-bottom: 20px;
+      }
+      .pdf-title {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 5px;
+      }
+      .pdf-subtitle {
+          font-size: 18px;
+          margin-bottom: 15px;
+      }
+      .pdf-course-info p {
+          margin-bottom: 5px;
+      }
+      .pdf-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+      }
+      .pdf-table th, .pdf-table td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: left;
+          font-size: 12px;
+      }
+      .pdf-table th {
+          background-color: #f2f2f2;
+          font-weight: bold;
+      }
+      .pdf-table tr:nth-child(even) {
+          background-color: #f9f9f9;
       }
     </style>
   <script type="importmap">
@@ -26,6 +70,7 @@
 </head>
   <body>
     <div id="root"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS9Ktby0JqHzXFKPcebVhlmWJ3m5WPzHoJgBofVTapwmRTJAzHtZKK+gQrEjCkfO4R+/vsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>

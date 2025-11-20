@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) => {
             <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <h1 className="text-lg sm:text-xl-center font-semibold text-gray-700 dark:text-gray-200 ml-4">วิทยาลัยนักบริหารสาธารณสุข</h1>
+        <h1 className=" text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-200 ml-4">วิทยาลัยนักบริหารสาธารณสุข</h1>
       </div>
 
       <div className="flex items-center">

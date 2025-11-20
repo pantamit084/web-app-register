@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import type { Announcement } from '../../types';
 
@@ -46,7 +45,7 @@ const AnnouncementModal: React.FC<AnnouncementModalProps> = ({ isOpen, onClose, 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-2xl" onClick={(e) => e.stopPropagation()}>
+      <div className="bg-white dark:bg-gray-600 rounded-lg shadow-xl w-full max-w-2xl" onClick={(e) => e.stopPropagation()}>
         <form onSubmit={handleSubmit} className="p-6">
           <div className="flex justify-between items-center mb-4 border-b dark:border-gray-700 pb-4">
             <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{announcement ? 'แก้ไขประกาศ' : 'เพิ่มประกาศใหม่'}</h3>
@@ -71,8 +70,19 @@ const AnnouncementModal: React.FC<AnnouncementModalProps> = ({ isOpen, onClose, 
             </div>
           </div>
           <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-4 gap-2 sm:gap-0 mt-6 pt-4 border-t dark:border-gray-700">
-            <button type="button" onClick={onClose} className="w-full sm:w-auto px-6 py-2 border border-gray-300 dark:border-gray-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">ยกเลิก</button>
-            <button type="submit" disabled={isSaving} className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-300">
+            <button 
+                type="button" 
+                onClick={onClose} 
+                className="w-full sm:w-auto px-6 py-2 border border-gray-300 dark:border-gray-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors disabled:cursor-wait"
+                disabled={isSaving}
+            >
+                ยกเลิก
+            </button>
+            <button 
+                type="submit" 
+                disabled={isSaving} 
+                className="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-blue-300 disabled:cursor-wait"
+            >
               {isSaving ? 'กำลังบันทึก...' : 'บันทึก'}
             </button>
           </div>

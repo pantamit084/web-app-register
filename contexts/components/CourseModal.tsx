@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import type { Course } from '../../types';
 
@@ -134,7 +133,12 @@ const CourseModal: React.FC<CourseModalProps> = ({ isOpen, onClose, onSave, cour
           </div>
 
           <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-4 gap-2 sm:gap-0 mt-6 pt-4 border-t dark:border-gray-700">
-            <button type="button" onClick={onClose} className="w-full sm:w-auto px-6 py-2 border border-gray-300 dark:border-gray-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+            <button 
+                type="button" 
+                onClick={onClose} 
+                className="w-full sm:w-auto px-6 py-2 border border-gray-300 dark:border-gray-500 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors disabled:cursor-wait"
+                disabled={isSaving}
+            >
               ยกเลิก
             </button>
             <button 
